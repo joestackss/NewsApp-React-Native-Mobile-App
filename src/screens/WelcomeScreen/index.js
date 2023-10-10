@@ -11,43 +11,17 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import { useFonts } from "expo-font";
-import { useCallback } from "react";
-import * as SplashScreen from "expo-splash-screen";
+
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Welcome() {
   const navigation = useNavigation();
 
-  const [fontsLoaded, fontError] = useFonts({
-    SpaceGroteskSemiBold: require("../../fonts/SpaceGrotesk-SemiBold.ttf"),
-    SpaceGroteskBold: require("../../fonts/SpaceGrotesk-Bold.ttf"),
-    SpaceGroteskMedium: require("../../fonts/SpaceGrotesk-Medium.ttf"),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-
-    // setTimeout(() => {
-    //   navigation.navigate("HomeTabs"); // Navigate to HomeTab
-    // }, 3000); // 3 seconds delay
-  });
-
-  useEffect(() => {
-    onLayoutRootView();
-  }, [fontsLoaded, fontError]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <ImageBackground
       source={require("../../../assets/images/welcome/reporter.jpg")}
       className="flex-1 justify-center items-center pb-6"
-      onLayout={onLayoutRootView}
+     
     >
       <LinearGradient
         colors={["transparent", "rgba(0,0,0,0.9)"]}

@@ -1,8 +1,7 @@
-import { View, Text } from "react-native";
+import { Platform } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeStack/HomeScreen";
 import NewsDetails from "../screens/HomeStack/NewsDetails";
@@ -11,6 +10,9 @@ import WelcomeScreen from "../screens/WelcomeScreen/index";
 import DiscoverScreen from "../screens/DiscoverStack/DiscoverScreen";
 import SavedScreen from "../screens/SavedStack/SavedScreen";
 import ProfileScreen from "../screens/ProfileStack/ProfileScreen";
+import SplashScreens from "../screens/SplashScreens/SplashScreens";
+
+const android = Platform.OS === "android";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -99,13 +101,13 @@ export default function AppNavigation() {
           tabBarLabelStyle: {
             fontSize: 12,
             fontFamily: "SpaceGroteskMedium",
-            paddingBottom: 10,
+            // paddingBottom: 10,
           },
           tabBarStyle: {
             backgroundColor: "white",
             // borderTopWidth: 0,
-            padding: 10,
-            height: 60,
+            // padding: 10,
+            // height: 60,
           },
         })}
       >
@@ -120,11 +122,12 @@ export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Welcome"
+        initialRouteName="SplashS"
         screenOptions={{
           headerShown: false,
         }}
       >
+        <Stack.Screen name="SplashS" component={SplashScreens} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
       </Stack.Navigator>
