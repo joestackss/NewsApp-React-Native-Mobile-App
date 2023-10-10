@@ -51,29 +51,34 @@ export default function HomeScreen() {
     <SafeAreaView className="">
       <StatusBar style={colorScheme == "dark" ? "light" : "dark"} />
 
-      <ScrollView className="">
-        <View>
-          {/* Header */}
-          <Header />
+      <View>
+        {/* Header */}
+        <Header />
 
-          {/* Trending News */}
-          {newsData?.length > 0 && <TrendingNews data={newsData} />}
+        {/* Trending News */}
+        {newsData?.length > 0 && <TrendingNews data={newsData} />}
 
-          {/* Categories */}
-          <View className="flex-row pl-2">
-            <CategoriesCard
-              categories={categories}
-              activeCategory={activeCategory}
-              handleChangeCategory={handleChangeCategory}
-            />
-          </View>
-
+        {/* Categories */}
+        <View className="flex-row pl-2 mb-4">
+          <CategoriesCard
+            categories={categories}
+            activeCategory={activeCategory}
+            handleChangeCategory={handleChangeCategory}
+          />
+        </View>
+        <ScrollView
+          className=""
+          contentContainerStyle={{
+            paddingTop: 1,
+            paddingBottom: 550,
+          }}
+        >
           {/* News */}
           <View className="flex-row pl-2">
             <NewsSection categories={categories} newsMain={newsData} />
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

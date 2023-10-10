@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { BookmarkSquareIcon } from "react-native-heroicons/outline";
@@ -18,9 +19,19 @@ export default function NewsSection({ newsMain, activeCategory }) {
     return date.toLocaleDateString(undefined, options);
   }
 
+  const navigation = useNavigation();
+
+  const handleClick = (item) => {
+    navigation.navigate("NewsDetails", item);
+  };
+
   const renderItem = ({ item, index }) => {
     return (
-      <TouchableOpacity className="mb-4 space-y-1" key={index}>
+      <TouchableOpacity
+        className="mb-4 space-y-1"
+        key={index}
+        onPress={() => handleClick(item)}
+      >
         <View className="flex-row justify-start w-[100%]shadow-sm">
           {/* Image */}
           <View className="items-start justify-start w-[20%]">
@@ -81,8 +92,11 @@ export default function NewsSection({ newsMain, activeCategory }) {
         scrollEnabled={false}
         data={newsMain}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.title}
         renderItem={renderItem}
+        contentContainerStyle={{
+          paddingBottom: hp(10),
+        }}
       />
     </View>
   );
