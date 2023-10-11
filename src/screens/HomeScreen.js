@@ -12,6 +12,7 @@ import NewsSection from "../components/NewsSection/NewsSection";
 
 import { useQuery } from "@tanstack/react-query";
 import { fetchBreakingNews, fetchRecommendedNews } from "../../utils/NewsApi";
+import MiniHeader from "../components/Header/MiniHeader";
 
 export default function HomeScreen() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -42,23 +43,31 @@ export default function HomeScreen() {
   });
 
   // console.log("breakingNews", breakingNews);
-  console.log("recommendedNews", recommendedNews);
 
   return (
-    <SafeAreaView className="">
+    <SafeAreaView className="bg-white">
       <StatusBar style={colorScheme == "dark" ? "light" : "dark"} />
 
       <View>
         {/* Header */}
+        
         <Header />
 
         {/* Trending News */}
-        {breakingNews.length > 0 && (
-          <TrendingNews label="Breaking News" data={breakingNews} />
+
+        {isTrendingLoading ? (
+          <Loading />
+        ) : (
+          <View>
+            <MiniHeader label="Breaking News" />
+            <TrendingNews label="Breaking News" data={breakingNews} />
+          </View>
         )}
 
         {/* News */}
-        <View className="flex-row">
+        <View className="">
+          <MiniHeader label="Recommended" />
+
           <NewsSection
             label="Recommendation"
             categories={categories}

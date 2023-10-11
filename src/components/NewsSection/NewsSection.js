@@ -170,27 +170,8 @@ export default function NewsSection({ newsMain, label }) {
   };
 
   return (
-    <View style={{ marginVertical: hp(2) }} className="space-y-2">
+    <View className="space-y-2 bg-white">
       {/* Header */}
-      <View className="mb-4 mx-4 flex-row justify-between items-center">
-        <Text
-          className="text-xl "
-          style={{
-            fontFamily: "SpaceGroteskBold",
-          }}
-        >
-          {label}
-        </Text>
-
-        <Text
-          className="text-base text-green-800 "
-          style={{
-            fontFamily: "SpaceGroteskBold",
-          }}
-        >
-          View all
-        </Text>
-      </View>
 
       <FlatList
         data={newsMain}

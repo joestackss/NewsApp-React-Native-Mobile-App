@@ -13,30 +13,11 @@ export default function TrendingNews({ data, label }) {
     navigation.navigate("NewsDetails", item);
   };
 
-  console.log("Trending Movies", data);
-  console.log("label", label);
+  // console.log("Trending Movies", data);
+  // console.log("label", label);
 
   return (
-    <View className="mt-4 mb-4 ">
-      <View className="px-4 mb-4 flex-row justify-between items-center">
-        <Text
-          className="text-xl "
-          style={{
-            fontFamily: "SpaceGroteskBold",
-          }}
-        >
-          {label}
-        </Text>
-
-        <Text
-          className="text-base text-green-800 "
-          style={{
-            fontFamily: "SpaceGroteskBold",
-          }}
-        >
-          View all
-        </Text>
-      </View>
+    <View className="">
       {/* Carousal */}
       <Carousal
         data={data}

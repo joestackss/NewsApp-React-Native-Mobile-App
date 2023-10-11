@@ -84,20 +84,20 @@ export default function SavedScreen() {
             ? JSON.parse(savedArticles)
             : [];
 
-          const isArticleBookmarkedList = urlList.map((url) =>
-            savedArticlesArray.some((savedArticle) => savedArticle.url === url)
-          );
+          // const isArticleBookmarkedList = urlList.map((url) =>
+          //   savedArticlesArray.some((savedArticle) => savedArticle.url === url)
+          // );
 
           // Set the bookmark status for all items based on the loaded data
-          setBookmarkStatus(isArticleBookmarkedList);
+          // setBookmarkStatus(isArticleBookmarkedList);
           setSavedArticles(savedArticlesArray);
-          console.log("Pull saved articles from AsyncStorage");
         } catch (error) {
           console.log("Error loading saved articles", error);
         }
       };
-      
+
       loadSavedArticles();
+      // console.log("Pull saved articles from AsyncStorage");
     }, [navigation, urlList]) // Include 'navigation' in the dependencies array if needed
   );
 
@@ -114,7 +114,7 @@ export default function SavedScreen() {
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
-        className="mb-4 space-y-1"
+        className="mb-4 space-y-1 "
         key={index}
         onPress={() => handleClick(item)}
       >
@@ -165,9 +165,7 @@ export default function SavedScreen() {
             <TouchableOpacity
               onPress={() => toggleBookmarkAndSave(item, index)}
             >
-              <BookmarkSquareIcon
-                color={bookmarkStatus[index] ? "green" : "gray"}
-              />
+              <BookmarkSquareIcon color="green" />
             </TouchableOpacity>
           </View>
         </View>
@@ -176,7 +174,7 @@ export default function SavedScreen() {
   };
 
   return (
-    <SafeAreaView className="p-4">
+    <SafeAreaView className="p-4 bg-white flex-1">
       {/* Header  */}
       <View className="flex-row justify-between items-center">
         <Text
@@ -202,7 +200,7 @@ export default function SavedScreen() {
         </TouchableOpacity>
       </View>
 
-      <View style={{ marginVertical: hp(2) }} className="space-y-2">
+      <View style={{ marginVertical: hp(2) }} className="space-y-2 ">
         <FlatList
           data={savedArticles}
           showsVerticalScrollIndicator={false}

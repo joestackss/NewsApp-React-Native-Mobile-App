@@ -20,6 +20,7 @@ import CategoriesCard from "../components/CategoriesCard";
 import NewsSection from "../components/NewsSection/NewsSection";
 import { MagnifyingGlassIcon, XMarkIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
+import { fetchDiscoverNews } from "../../utils/NewsApi";
 
 export default function DiscoverScreen() {
   const navigation = useNavigation();
@@ -28,14 +29,35 @@ export default function DiscoverScreen() {
   const [selectedCategoryTitle, setSelectedCategoryTitle] =
     useState("Architecture");
   const [newsMain, setNewsMain] = useState([]);
+  const [discoverNews, setDiscoverNews] = useState([]);
+
+  useEffect(() => {
+    console.log("active category", activeCategory);
+  }, [activeCategory]);
 
   const handleChangeCategory = (category) => {
     // getRecipes(category);
     setActiveCategory(category);
-    setNewsMain([]);
-    // console.log("category", category);
+    setDiscoverNews([]);
+    console.log("category", category);
   };
 
+  const { isLoading: isDiscoverLoading } = useQuery({
+    queryKey: ["discoverNews", activeCategory], // Include the category as part of the key
+    queryFn: () => fetchDiscoverNews(activeCategory), // You can skip the query if the category is "business"
+    onSuccess: (data) => {
+      // Filter out articles with title "[Removed]"
+      const filteredNews = data.articles.filter(
+        (article) => article.title !== "[Removed]"
+      );
+      setDiscoverNews(filteredNews);
+    },
+    onError: (error) => {
+      console.log("Error fetching discover news", error);
+    },
+  });
+
+  // console.log("discoverNews", discoverNews);
   // console.log(newsData);
 
   // Categories
@@ -102,12 +124,32 @@ export default function DiscoverScreen() {
             handleChangeCategory={handleChangeCategory}
           />
         </View>
-        <View className="">
+        <View className="h-full">
           {/* News */}
+          <View className="my-4 mx-4 flex-row justify-between items-center">
+            <Text
+              className="text-xl "
+              style={{
+                fontFamily: "SpaceGroteskBold",
+              }}
+            >
+              Discover
+            </Text>
+
+            <Text
+              className="text-base text-green-800 "
+              style={{
+                fontFamily: "SpaceGroteskBold",
+              }}
+            >
+              View all
+            </Text>
+          </View>
+
           <View className="flex-row">
             <NewsSection
               categories={categories}
-              newsMain={newsData}
+              newsMain={discoverNews}
               label="Discovery"
             />
           </View>
