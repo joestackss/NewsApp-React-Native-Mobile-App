@@ -7,12 +7,14 @@ import TrendingCard from "./TrendingCard";
 var { width } = Dimensions.get("window");
 
 export default function TrendingNews({ data, label }) {
-  // console.log("Trending Movies", data);
   const navigation = useNavigation();
 
   const handleClick = (item) => {
     navigation.navigate("NewsDetails", item);
   };
+
+  console.log("Trending Movies", data);
+  console.log("label", label);
 
   return (
     <View className="mt-4 mb-4 ">

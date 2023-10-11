@@ -96,6 +96,7 @@ export default function SavedScreen() {
           console.log("Error loading saved articles", error);
         }
       };
+      
       loadSavedArticles();
     }, [navigation, urlList]) // Include 'navigation' in the dependencies array if needed
   );

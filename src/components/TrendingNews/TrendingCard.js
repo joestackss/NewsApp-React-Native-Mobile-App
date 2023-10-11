@@ -12,6 +12,7 @@ var { width, height } = Dimensions.get("window");
 
 export default function TrendingCard({ item, handleClick }) {
   // console.log("Movie Image", item.poster_path);
+  console.log("News Item", item);
 
   return (
     <TouchableWithoutFeedback onPress={() => handleClick(item)}>
@@ -44,27 +45,29 @@ export default function TrendingCard({ item, handleClick }) {
           end={{ x: 0.5, y: 1 }}
         />
 
-        <View className="absolute bottom-6 left-4 justify-between h-[80%]">
-          <View className="bg-white rounded-full p-1 w-1/2">
+        <View className="absolute bottom-6 left-4 justify-end h-[80%]">
+          {/* <View className="bg-white rounded-full p-1 w-1/2">
             {item.title.includes("-") && (
               <Text className="text-green-700 text-sm font-medium">
                 {item.title.split("-")[1].trim().slice(0, 18)}
               </Text>
             )}
-          </View>
+          </View> */}
 
           <View className=" space-y-1">
             <View className=" max-w-[98%]">
-              <Text className="text-white text-base font-semibold">
+              <Text className="text-white text-base font-semibold capitalize">
                 {item.title.length > 60
-                  ? item.title.split("-")[0].slice(0, 60) + "..."
+                  ? item.title.slice(0, 58) + "..."
                   : item.title.split("-")[0] || "N/A"}
               </Text>
             </View>
 
             <View className="">
               <Text className="text-neutral-300 text-sm font-medium">
-                {item.author}
+                {item?.author?.length > 20
+                  ? item.author.slice(0, 20) + "..."
+                  : item.author}
               </Text>
             </View>
           </View>

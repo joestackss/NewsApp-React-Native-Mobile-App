@@ -130,7 +130,9 @@ export default function NewsSection({ newsMain, label }) {
           <View className="w-[70%] pl-4 justify-center space-y-1">
             {/* Author */}
             <Text className="text-xs font-bold text-gray-900">
-              {item.author}
+              {item?.author?.length > 20
+                ? item.author.slice(0, 20) + "..."
+                : item.author}
             </Text>
 
             {/* Title */}
