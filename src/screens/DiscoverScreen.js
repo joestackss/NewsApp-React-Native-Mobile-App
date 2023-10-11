@@ -28,7 +28,6 @@ export default function DiscoverScreen() {
   const [selectedCategoryTitle, setSelectedCategoryTitle] =
     useState("Architecture");
   const [newsMain, setNewsMain] = useState([]);
-  const [showHeader, setShowHeader] = useState(true);
 
   const handleChangeCategory = (category) => {
     // getRecipes(category);

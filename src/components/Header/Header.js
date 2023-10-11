@@ -7,12 +7,12 @@ export default function Header() {
     <View className="flex-row justify-between items-center mx-4 mt-4">
       <View className="">
         <Text
-          className="font-spaceGroteskBold text-2xl text-green-800 font-extrabold"
+          className="font-spaceGroteskBold text-2xl text-green-800 font-extrabold uppercase"
           style={{
             fontFamily: "SpaceGroteskBold",
           }}
         >
-          STACKS
+          stack news
         </Text>
       </View>
 

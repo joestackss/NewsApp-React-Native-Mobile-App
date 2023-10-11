@@ -12,7 +12,6 @@ export default function SavedScreen() {
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const [urlList, setUrlList] = useState([]);
 
-
   // Function to handle click on an item
   const handleClick = (item) => {
     navigation.navigate("NewsDetails", item);
@@ -84,6 +83,13 @@ export default function SavedScreen() {
           const savedArticlesArray = savedArticles
             ? JSON.parse(savedArticles)
             : [];
+
+          const isArticleBookmarkedList = urlList.map((url) =>
+            savedArticlesArray.some((savedArticle) => savedArticle.url === url)
+          );
+
+          // Set the bookmark status for all items based on the loaded data
+          setBookmarkStatus(isArticleBookmarkedList);
           setSavedArticles(savedArticlesArray);
           console.log("Pull saved articles from AsyncStorage");
         } catch (error) {
@@ -91,32 +97,8 @@ export default function SavedScreen() {
         }
       };
       loadSavedArticles();
-    }, [navigation]) // Include 'navigation' in the dependencies array if needed
+    }, [navigation, urlList]) // Include 'navigation' in the dependencies array if needed
   );
-
-  useEffect(() => {
-    const loadSavedArticles = async () => {
-      try {
-        const savedArticles = await AsyncStorage.getItem("savedArticles");
-        const savedArticlesArray = savedArticles
-          ? JSON.parse(savedArticles)
-          : [];
-
-        // Check if each URL in 'urlList' exists in the bookmarked list
-        const isArticleBookmarkedList = urlList.map((url) =>
-          savedArticlesArray.some((savedArticle) => savedArticle.url === url)
-        );
-
-        // Set the bookmark status for all items based on the loaded data
-        setBookmarkStatus(isArticleBookmarkedList);
-        console.log("Check if the current article is in bookmarks");
-      } catch (error) {
-        console.log("Error Loading Saved Articles", error);
-      }
-    };
-
-    loadSavedArticles();
-  }, [urlList]);
 
   const clearSavedArticles = async () => {
     try {
