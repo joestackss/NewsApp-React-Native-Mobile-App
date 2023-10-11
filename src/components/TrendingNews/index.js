@@ -6,7 +6,7 @@ import TrendingCard from "./TrendingCard";
 
 var { width } = Dimensions.get("window");
 
-export default function TrendingNews({ data }) {
+export default function TrendingNews({ data, label }) {
   // console.log("Trending Movies", data);
   const navigation = useNavigation();
 
@@ -15,7 +15,26 @@ export default function TrendingNews({ data }) {
   };
 
   return (
-    <View className="mt-4 mb-8 ">
+    <View className="mt-4 mb-4 ">
+      <View className="px-4 mb-4 flex-row justify-between items-center">
+        <Text
+          className="text-xl "
+          style={{
+            fontFamily: "SpaceGroteskBold",
+          }}
+        >
+          {label}
+        </Text>
+
+        <Text
+          className="text-base text-green-800 "
+          style={{
+            fontFamily: "SpaceGroteskBold",
+          }}
+        >
+          View all
+        </Text>
+      </View>
       {/* Carousal */}
       <Carousal
         data={data}

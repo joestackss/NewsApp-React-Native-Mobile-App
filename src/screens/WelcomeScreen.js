@@ -19,9 +19,8 @@ export default function Welcome() {
 
   return (
     <ImageBackground
-      source={require("../../../assets/images/welcome/reporter.jpg")}
+      source={require("../../assets/images/welcome/reporter.jpg")}
       className="flex-1 justify-center items-center pb-6"
-     
     >
       <LinearGradient
         colors={["transparent", "rgba(0,0,0,0.9)"]}

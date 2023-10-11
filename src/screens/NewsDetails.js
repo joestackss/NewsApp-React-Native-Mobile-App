@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
-import Loading from "../../components/Loading";
+import Loading from "../components/Loading";
 import { ChevronLeftIcon, ShareIcon } from "react-native-heroicons/outline";
 import { BookmarkSquareIcon } from "react-native-heroicons/solid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,7 +21,7 @@ export default function NewsDetails() {
   const navigation = useNavigation();
   const [isBookmarked, toggleBookmark] = useState(false);
 
-  console.log("item URL", item.url);
+  // console.log("item URL", item.url);
 
   const toggleBookmarkAndSave = async () => {
     try {

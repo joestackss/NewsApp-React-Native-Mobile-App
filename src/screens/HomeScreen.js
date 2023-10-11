@@ -3,14 +3,14 @@ import React, { useEffect, useState, useReducer } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useColorScheme } from "nativewind";
 import { StatusBar } from "expo-status-bar";
-import Loading from "../../components/Loading";
+import Loading from "../components/Loading";
 import { useQuery } from "@tanstack/react-query";
-import { categories, newsData } from "../../constants";
+import { categories, newsData } from "../constants";
 
-import TrendingNews from "../../components/TrendingNews";
-import Header from "../../components/Header/Header";
-import CategoriesCard from "../../components/CategoriesCard";
-import NewsSection from "../../components/NewsSection/NewsSection";
+import TrendingNews from "../components/TrendingNews";
+import Header from "../components/Header/Header";
+import CategoriesCard from "../components/CategoriesCard";
+import NewsSection from "../components/NewsSection/NewsSection";
 
 export default function HomeScreen() {
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -25,7 +25,7 @@ export default function HomeScreen() {
     // getRecipes(category);
     setActiveCategory(category);
     setNewsMain([]);
-    console.log("category", category);
+    // console.log("category", category);
   };
 
   // console.log(newsData);
@@ -56,28 +56,18 @@ export default function HomeScreen() {
         <Header />
 
         {/* Trending News */}
-        {newsData?.length > 0 && <TrendingNews data={newsData} />}
+        {newsData?.length > 0 && (
+          <TrendingNews label="Breaking News" data={newsData} />
+        )}
 
-        {/* Categories */}
-        <View className="flex-row pl-2 mb-4">
-          <CategoriesCard
+        {/* News */}
+        <View className="flex-row">
+          <NewsSection
+            label="Recommendation"
             categories={categories}
-            activeCategory={activeCategory}
-            handleChangeCategory={handleChangeCategory}
+            newsMain={newsData}
           />
         </View>
-        <ScrollView
-          className=""
-          contentContainerStyle={{
-            paddingTop: 1,
-            paddingBottom: 550,
-          }}
-        >
-          {/* News */}
-          <View className="flex-row pl-2">
-            <NewsSection categories={categories} newsMain={newsData} />
-          </View>
-        </ScrollView>
       </View>
     </SafeAreaView>
   );

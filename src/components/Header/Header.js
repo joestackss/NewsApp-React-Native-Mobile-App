@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
 
@@ -32,5 +32,3 @@ export default function Header() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});
