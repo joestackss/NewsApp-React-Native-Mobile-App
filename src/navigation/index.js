@@ -12,6 +12,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import SplashScreens from "../screens/SplashScreens";
 import { Ionicons } from "@expo/vector-icons";
 import SearchScreen from "../screens/SearchScreen";
+import { useColorScheme } from "nativewind";
 
 const android = Platform.OS === "android";
 
@@ -19,6 +20,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   const TabNavigator = () => {
     return (
       <Tab.Navigator
@@ -56,7 +58,7 @@ export default function AppNavigation() {
             // paddingBottom: 10,
           },
           tabBarStyle: {
-            backgroundColor: "white",
+            backgroundColor: colorScheme == "dark" ? "black" : "white",
             // borderTopWidth: 0,
             // padding: 10,
             // height: 60,
