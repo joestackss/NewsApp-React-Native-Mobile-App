@@ -5,8 +5,11 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { BookmarkSquareIcon } from "react-native-heroicons/solid";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "nativewind";
 
 export default function SavedScreen() {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   const navigation = useNavigation();
   const [savedArticles, setSavedArticles] = useState([]);
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
@@ -137,13 +140,13 @@ export default function SavedScreen() {
 
           <View className="w-[70%] pl-4 justify-center space-y-1">
             {/* Author */}
-            <Text className="text-xs font-bold text-gray-900">
+            <Text className="text-xs font-bold text-gray-900 dark:text-neutral-300">
               {item.author}
             </Text>
 
             {/* Title */}
             <Text
-              className="text-neutral-800 capitalize max-w-[90%] "
+              className="text-neutral-800 capitalize max-w-[90%] dark:text-white "
               style={{
                 fontSize: hp(1.7),
                 fontFamily: "SpaceGroteskBold",
@@ -155,7 +158,7 @@ export default function SavedScreen() {
             </Text>
 
             {/* Date */}
-            <Text className="text-xs text-gray-700">
+            <Text className="text-xs text-gray-700 dark:text-neutral-300">
               {formatDate(item.publishedAt)}
             </Text>
           </View>
@@ -174,11 +177,12 @@ export default function SavedScreen() {
   };
 
   return (
-    <SafeAreaView className="p-4 bg-white flex-1">
+    <SafeAreaView className="p-4 bg-white flex-1 dark:bg-neutral-900">
+      <StatusBar style={colorScheme == "dark" ? "light" : "dark"} />
       {/* Header  */}
       <View className="flex-row justify-between items-center">
         <Text
-          className="font-bold text-xl text-green-800"
+          className="font-bold text-xl text-green-800 dark:text-white"
           style={{
             fontFamily: "SpaceGroteskBold",
           }}
@@ -190,7 +194,7 @@ export default function SavedScreen() {
           className="bg-green-800 py-1 px-4 rounded-lg"
         >
           <Text
-            className="font-bold text-lg text-white"
+            className="font-bold text-lg text-white dark:text-white"
             style={{
               fontFamily: "SpaceGroteskBold",
             }}

@@ -131,7 +131,7 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
 
           <View className="w-[70%] pl-4 justify-center space-y-1">
             {/* Author */}
-            <Text className="text-xs font-bold text-gray-900">
+            <Text className="text-xs font-bold text-gray-900 dark:text-neutral-300">
               {item?.author?.length > 20
                 ? item.author.slice(0, 20) + "..."
                 : item.author}
@@ -139,7 +139,7 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
 
             {/* Title */}
             <Text
-              className="text-neutral-800 capitalize max-w-[90%] "
+              className="text-neutral-800 capitalize max-w-[90%] dark:text-white "
               style={{
                 fontSize: hp(1.7),
                 fontFamily: "SpaceGroteskBold",
@@ -151,7 +151,7 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
             </Text>
 
             {/* Date */}
-            <Text className="text-xs text-gray-700">
+            <Text className="text-xs text-gray-700 dark:text-neutral-300">
               {formatDate(item.publishedAt)}
             </Text>
           </View>
@@ -172,7 +172,7 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
   };
 
   return (
-    <View className="space-y-2 bg-white">
+    <View className="space-y-2 bg-white dark:bg-neutral-900">
       {/* Header */}
 
       <FlatList

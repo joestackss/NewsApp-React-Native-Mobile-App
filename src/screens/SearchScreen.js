@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   ScrollView,
+  useColorScheme,
 } from "react-native";
 import React, { useCallback, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -19,6 +20,7 @@ var { width, height } = Dimensions.get("window");
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 export default function SearchScreen() {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
@@ -53,7 +55,7 @@ export default function SearchScreen() {
   console.log("results", results.length);
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-white dark:bg-neutral-900">
       {/* Search Input */}
 
       <View className="mx-4 mb-3 mt-12 flex-row p-2 justify-between items-center bg-neutral-100 rounded-lg">
@@ -61,7 +63,7 @@ export default function SearchScreen() {
           onChangeText={handleTextDebounce}
           placeholder="Search for your Favorite news"
           placeholderTextColor={"gray"}
-          className=" font-medium text-black tracking-wider p-3"
+          className=" font-medium text-black tracking-wider p-3 "
         />
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <XMarkIcon size="25" color="green" strokeWidth={3} />
@@ -69,9 +71,9 @@ export default function SearchScreen() {
       </View>
 
       {/* Search Results */}
-      <View className="mx-4 mb-4">
+      <View className="mx-4 mb-4 ">
         <Text
-          className="text-xl "
+          className="text-xl dark:text-white"
           style={{
             fontFamily: "SpaceGroteskBold",
           }}

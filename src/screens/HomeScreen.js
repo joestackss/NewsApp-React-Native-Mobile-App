@@ -1,10 +1,10 @@
-import { View, ScrollView} from "react-native";
-import React, { useState} from "react";
+import { View, ScrollView } from "react-native";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useColorScheme } from "nativewind";
 import { StatusBar } from "expo-status-bar";
 import Loading from "../components/Loading";
-import { categories, newsData } from "../constants";
+import { categories } from "../constants";
 
 import TrendingNews from "../components/TrendingNews";
 import Header from "../components/Header/Header";
@@ -52,7 +52,7 @@ export default function HomeScreen() {
   // console.log("breakingNews", breakingNews);
 
   return (
-    <SafeAreaView className="bg-white flex-1">
+    <SafeAreaView className=" flex-1 bg-white dark:bg-neutral-900">
       <StatusBar style={colorScheme == "dark" ? "light" : "dark"} />
 
       <View>
@@ -64,7 +64,7 @@ export default function HomeScreen() {
         {isTrendingLoading ? (
           <Loading />
         ) : (
-          <View>
+          <View className="">
             <MiniHeader label="Breaking News" />
             <TrendingNews label="Breaking News" data={breakingNews} />
           </View>

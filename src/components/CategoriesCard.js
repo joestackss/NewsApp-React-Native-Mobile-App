@@ -20,8 +20,12 @@ export default function CategoriesCard({
       >
         {categories.map((category, index) => {
           let isActive = category.title == activeCategory;
-          let activeButtonClass = isActive ? "bg-green-700 " : "bg-black/10 ";
-          let activeTextClass = isActive ? "text-white " : "text-gray-600 ";
+          let activeButtonClass = isActive
+            ? "bg-green-700 "
+            : "bg-black/10 dark:bg-neutral-400 ";
+          let activeTextClass = isActive
+            ? "text-white "
+            : "text-gray-600 dark:text-neutral-600 ";
 
           return (
             <TouchableOpacity
@@ -29,9 +33,12 @@ export default function CategoriesCard({
               onPress={() => handleChangeCategory(category.title)}
               className="flex items-center space-y-1"
             >
-              <View className={"rounded-full py-2 px-4 " + activeButtonClass}>
+              <View
+                className={
+                  "rounded-full py-2 px-4 " + activeButtonClass
+                }
+              >
                 <Text
-                  //   className="text-white"
                   className={"capitalize " + activeTextClass}
                   style={{
                     fontSize: hp(1.6),

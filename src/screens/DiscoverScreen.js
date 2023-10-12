@@ -60,14 +60,14 @@ export default function DiscoverScreen() {
   });
 
   return (
-    <SafeAreaView className="pt-8 bg-white">
+    <SafeAreaView className="pt-8 bg-white dark:bg-neutral-900">
       <StatusBar style={colorScheme == "dark" ? "light" : "dark"} />
 
       <View>
         {/* Header */}
         <View className="px-4 mb-6 justify-between">
           <Text
-            className="text-3xl text-green-800"
+            className="text-3xl text-green-800 dark:text-white"
             style={{
               fontFamily: "SpaceGroteskBold",
             }}
@@ -76,7 +76,7 @@ export default function DiscoverScreen() {
           </Text>
 
           <Text
-            className="text-base text-gray-600 "
+            className="text-base text-gray-600 dark:text-neutral-300 "
             style={{
               fontFamily: "SpaceGroteskMedium",
             }}
@@ -110,7 +110,7 @@ export default function DiscoverScreen() {
           {/* News */}
           <View className="my-4 mx-4 flex-row justify-between items-center">
             <Text
-              className="text-xl "
+              className="text-xl dark:text-white"
               style={{
                 fontFamily: "SpaceGroteskBold",
               }}
@@ -119,7 +119,7 @@ export default function DiscoverScreen() {
             </Text>
 
             <Text
-              className="text-base text-green-800 "
+              className="text-base text-green-800 dark:text-neutral-300"
               style={{
                 fontFamily: "SpaceGroteskBold",
               }}
