@@ -1,8 +1,10 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { BellIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Header() {
+  const navigation = useNavigation();
   return (
     <View className="flex-row justify-between items-center mx-4 mt-4">
       <View className="">

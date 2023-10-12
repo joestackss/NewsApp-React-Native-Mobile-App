@@ -21,6 +21,7 @@
     "expo-linear-gradient": "~12.3.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
+    "lodash": "^4.17.21",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.72.5",

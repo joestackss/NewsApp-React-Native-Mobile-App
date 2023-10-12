@@ -11,8 +11,9 @@ const recommendedNewsUrl = `${apiBaseUrl}/top-headlines?country=us&category=busi
 const discoverNewsUrl = (discover) =>
   `${apiBaseUrl}/top-headlines?country=us&category=${discover}&apiKey=${newsApiKey}`;
 
-// const searchNewsUrl = (search) =>
-//   `${apiBaseUrl}/everything?q=${search}&apiKey=${newsApiKey}`;
+
+const searchNewsUrl = (query) =>
+  `${apiBaseUrl}/everything?q=${query}&apiKey=${newsApiKey}`;
 
 const newsApiCall = async (endpoints, params) => {
   const options = {
@@ -42,6 +43,8 @@ export const fetchDiscoverNews = async (discover) => {
   return await newsApiCall(discoverNewsUrl(discover));
 };
 
-// export const fetchSearchNews = async (search) => {
-//   return await newsApiCall(searchNewsUrl(search));
-// };
+
+export const fetchSearchNews = async (query) => {
+  const endpoint = searchNewsUrl(query);
+  return await newsApiCall(endpoint);
+};

@@ -11,6 +11,7 @@ import SavedScreen from "../screens/SavedScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SplashScreens from "../screens/SplashScreens";
 import { Ionicons } from "@expo/vector-icons";
+import SearchScreen from "../screens/SearchScreen";
 
 const android = Platform.OS === "android";
 
@@ -32,8 +33,8 @@ export default function AppNavigation() {
               iconName = "compass-outline";
             } else if (route.name === "Saved") {
               iconName = "bookmark-outline";
-            } else if (route.name === "Profile") {
-              iconName = "person-outline";
+            } else if (route.name === "Search") {
+              iconName = "search-outline";
             }
 
             const customizeSize = 25;
@@ -65,7 +66,7 @@ export default function AppNavigation() {
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Discover" component={DiscoverScreen} />
         <Tab.Screen name="Saved" component={SavedScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Search" component={SearchScreen} />
       </Tab.Navigator>
     );
   };
@@ -80,6 +81,7 @@ export default function AppNavigation() {
       >
         <Stack.Screen name="SplashS" component={SplashScreens} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen name="Search" component={SearchScreen} />
         <Stack.Screen name="NewsDetails" component={NewsDetails} />
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
       </Stack.Navigator>

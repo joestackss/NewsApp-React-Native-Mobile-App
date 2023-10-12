@@ -5,11 +5,13 @@ import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { BookmarkSquareIcon } from "react-native-heroicons/solid";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-export default function NewsSection({ newsMain, label }) {
+export default function NewsSection({ newsMain, label, loadMoreData }) {
   const navigation = useNavigation();
   const [urlList, setUrlList] = useState([]);
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
   const [showHeader, setShowHeader] = useState(true);
+
+  const [newssMain, setNewsMain] = useState(false);
 
   // Function to format the date
   function formatDate(isoDate) {
@@ -174,10 +176,17 @@ export default function NewsSection({ newsMain, label }) {
       {/* Header */}
 
       <FlatList
+        nestedScrollEnabled={true}
+        scrollEnabled={false}
         data={newsMain}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => item.title}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
+        // onEndReached={loadMoreData} // Add this callback to load more data
+        // onEndReachedThreshold={0.1} // Adjust this threshold as needed
+        // contentContainerStyle={{
+        //   paddingBottom: hp(110),
+        // }}
       />
     </View>
   );

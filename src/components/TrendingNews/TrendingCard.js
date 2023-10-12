@@ -12,7 +12,7 @@ var { width, height } = Dimensions.get("window");
 
 export default function TrendingCard({ item, handleClick }) {
   // console.log("Movie Image", item.poster_path);
-  console.log("News Item", item);
+  // console.log("News Item", item);
 
   return (
     <TouchableWithoutFeedback onPress={() => handleClick(item)}>

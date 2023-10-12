@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState, useReducer } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,6 +22,7 @@ import NewsSection from "../components/NewsSection/NewsSection";
 import { MagnifyingGlassIcon, XMarkIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { fetchDiscoverNews } from "../../utils/NewsApi";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 export default function DiscoverScreen() {
   const navigation = useNavigation();
@@ -56,26 +58,6 @@ export default function DiscoverScreen() {
       console.log("Error fetching discover news", error);
     },
   });
-
-  // console.log("discoverNews", discoverNews);
-  // console.log(newsData);
-
-  // Categories
-  // const { isLoading: isCategoriesLoading } = useQuery({
-  //   queryKey: ["categories"],
-  //   queryFn: () =>
-  //     client.fetch(
-  //       `*[_type =='category']{
-  //         ...
-  //       }`
-  //     ),
-  //   onSuccess: (data) => {
-  //     setCategory(data);
-  //   },
-  //   onError: (error) => {
-  //     console.log("Error fetching categories", error);
-  //   },
-  // });
 
   return (
     <SafeAreaView className="pt-8 bg-white">
@@ -146,13 +128,23 @@ export default function DiscoverScreen() {
             </Text>
           </View>
 
-          <View className="flex-row">
-            <NewsSection
-              categories={categories}
-              newsMain={discoverNews}
-              label="Discovery"
-            />
-          </View>
+          {isDiscoverLoading ? (
+            <View className="mt-8 flex-1 justify-center items-center">
+              <ActivityIndicator size="large" color="red" />
+            </View>
+          ) : (
+            <ScrollView
+              contentContainerStyle={{
+                paddingBottom: hp(70),
+              }}
+            >
+              <NewsSection
+                categories={categories}
+                newsMain={discoverNews}
+                label="Discovery"
+              />
+            </ScrollView>
+          )}
         </View>
       </View>
     </SafeAreaView>
