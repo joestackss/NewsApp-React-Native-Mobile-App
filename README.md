@@ -1,6 +1,6 @@
 # NewsApp-React-Native-Mobile-App
 
-![Image]([https://cdn.dribbble.com/userupload/10352875/file/original-946276bbf114e49f5a41ffefddeda299.png?resize=1200x675](https://cdn.dribbble.com/userupload/11230077/file/original-5bd1c582562508ab6d9e5fb52be12d6b.png?resize=1504x846))
+![Image](https://cdn.dribbble.com/userupload/11230077/file/original-5bd1c582562508ab6d9e5fb52be12d6b.png?resize=1504x846)
 
   
   <p align="left">
