@@ -18,12 +18,6 @@ install dev dependencies
 
 ### `npm install`
 
-## Then
-
-go to https://www.themoviedb.org, create an account and get the api key, then use that api key in constants/index.js file
-
-## Then
-
 Run The app
 
 ### `npm start`
