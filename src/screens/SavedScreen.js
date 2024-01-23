@@ -57,7 +57,7 @@ export default function SavedScreen() {
         const updatedStatus = [...bookmarkStatus];
         updatedStatus[index] = true;
         setBookmarkStatus(updatedStatus);
-        console.log("Article is bookmarked");
+        // console.log("Article is bookmarked");
       } else {
         // If the article is already bookmarked, remove it from the list
         const updatedSavedArticlesArray = savedArticlesArray.filter(
@@ -70,10 +70,10 @@ export default function SavedScreen() {
         const updatedStatus = [...bookmarkStatus];
         updatedStatus[index] = false;
         setBookmarkStatus(updatedStatus);
-        console.log("Article is removed from bookmarks");
+        // console.log("Article is removed from bookmarks");
       }
     } catch (error) {
-      console.log("Error Saving/Removing Article", error);
+      // console.log("Error Saving/Removing Article", error);
     }
   };
 
@@ -95,7 +95,7 @@ export default function SavedScreen() {
           // setBookmarkStatus(isArticleBookmarkedList);
           setSavedArticles(savedArticlesArray);
         } catch (error) {
-          console.log("Error loading saved articles", error);
+          // console.log("Error loading saved articles", error);
         }
       };
 
@@ -110,7 +110,7 @@ export default function SavedScreen() {
       setSavedArticles([]);
       console.log("Clear all saved articles");
     } catch (error) {
-      console.log("Error clearing saved articles", error);
+      // console.log("Error clearing saved articles", error);
     }
   };
 
@@ -179,6 +179,7 @@ export default function SavedScreen() {
   return (
     <SafeAreaView className="p-4 bg-white flex-1 dark:bg-neutral-900">
       <StatusBar style={colorScheme == "dark" ? "light" : "dark"} />
+      
       {/* Header  */}
       <View className="flex-row justify-between items-center">
         <Text

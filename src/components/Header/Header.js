@@ -21,7 +21,7 @@ export default function Header() {
         </Text>
       </View>
 
-      {/* Notification and Search Icon */}
+      {/* Switch and Search Icon */}
       <View className="flex-row space-x-4 rounded-full justify-center items-center">
         <Switch value={colorScheme == "dark"} onChange={toggleColorScheme} />
 

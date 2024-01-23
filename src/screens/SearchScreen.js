@@ -1,44 +1,35 @@
 import {
   View,
   Text,
-  Image,
-  Dimensions,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   ScrollView,
-  useColorScheme,
 } from "react-native";
 import React, { useCallback, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { XMarkIcon } from "react-native-heroicons/outline";
-import Loading from "../components/Loading";
-import { fetchSearchNews, searchNews } from "../../utils/NewsApi";
-import { debounce, set } from "lodash";
+import { fetchSearchNews } from "../../utils/NewsApi";
+import { debounce } from "lodash";
 import NewsSection from "../components/NewsSection/NewsSection";
-var { width, height } = Dimensions.get("window");
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 export default function SearchScreen() {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = async (search) => {
-    if (search && search.length > 2) {
+    if (search && search?.length > 2) {
       setLoading(true);
       setResults([]);
+      setSearchTerm(search);
 
       try {
         const data = await fetchSearchNews(search);
 
-        console.log("We got our search results");
         setLoading(false);
-
-        // console.log("Search query", search);
-        // console.log("data", data);
 
         if (data && data.articles) {
           setResults(data.articles);
@@ -52,8 +43,6 @@ export default function SearchScreen() {
 
   const handleTextDebounce = useCallback(debounce(handleSearch, 400), []);
 
-  console.log("results", results.length);
-
   return (
     <View className="flex-1 bg-white dark:bg-neutral-900">
       {/* Search Input */}
@@ -61,9 +50,9 @@ export default function SearchScreen() {
       <View className="mx-4 mb-3 mt-12 flex-row p-2 justify-between items-center bg-neutral-100 rounded-lg">
         <TextInput
           onChangeText={handleTextDebounce}
-          placeholder="Search for your Favorite news"
+          placeholder="Search for your news"
           placeholderTextColor={"gray"}
-          className=" font-medium text-black tracking-wider p-3 "
+          className=" font-medium text-black tracking-wider p-3 py-1 w-[90%] "
         />
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <XMarkIcon size="25" color="green" strokeWidth={3} />
@@ -78,7 +67,7 @@ export default function SearchScreen() {
             fontFamily: "SpaceGroteskBold",
           }}
         >
-          {results.length} News
+          {results?.length} News for {searchTerm}
         </Text>
       </View>
 
@@ -87,7 +76,7 @@ export default function SearchScreen() {
           paddingBottom: hp(5),
         }}
       >
-        <NewsSection newsMain={results} label="Search Results" />
+        <NewsSection newsProps={results} label="Search Results" />
       </ScrollView>
     </View>
   );

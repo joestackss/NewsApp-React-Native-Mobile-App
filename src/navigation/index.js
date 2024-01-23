@@ -84,7 +84,11 @@ export default function AppNavigation() {
         <Stack.Screen name="SplashS" component={SplashScreens} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
-        <Stack.Screen name="NewsDetails" component={NewsDetails} />
+        <Stack.Screen
+          name="NewsDetails"
+          component={NewsDetails}
+          options={{ animation: "slide_from_bottom" }}
+        />
         <Stack.Screen name="HomeTabs" component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -5,13 +5,10 @@ import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { BookmarkSquareIcon } from "react-native-heroicons/solid";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
-export default function NewsSection({ newsMain, label, loadMoreData }) {
+export default function NewsSection({ newsProps }) {
   const navigation = useNavigation();
   const [urlList, setUrlList] = useState([]);
   const [bookmarkStatus, setBookmarkStatus] = useState([]);
-  const [showHeader, setShowHeader] = useState(true);
-
-  const [newssMain, setNewsMain] = useState(false);
 
   // Function to format the date
   function formatDate(isoDate) {
@@ -27,9 +24,9 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
 
   // Hook to set the URL list
   useEffect(() => {
-    const urls = newsMain.map((item) => item.url);
+    const urls = newsProps.map((item) => item.url);
     setUrlList(urls);
-  }, [newsMain]);
+  }, [newsProps]);
 
   // Function to handle click on an item
   const handleClick = (item) => {
@@ -57,7 +54,6 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
         const updatedStatus = [...bookmarkStatus];
         updatedStatus[index] = true;
         setBookmarkStatus(updatedStatus);
-        console.log("Article is bookmarked");
       } else {
         // If the article is already bookmarked, remove it from the list
         const updatedSavedArticlesArray = savedArticlesArray.filter(
@@ -70,7 +66,6 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
         const updatedStatus = [...bookmarkStatus];
         updatedStatus[index] = false;
         setBookmarkStatus(updatedStatus);
-        console.log("Article is removed from bookmarks");
       }
     } catch (error) {
       console.log("Error Saving/Removing Article", error);
@@ -94,7 +89,6 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
 
           // Set the bookmark status for all items based on the loaded data
           setBookmarkStatus(isArticleBookmarkedList);
-          console.log("Check if the current article is in bookmarks");
         } catch (error) {
           console.log("Error Loading Saved Articles", error);
         }
@@ -156,7 +150,7 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
             </Text>
           </View>
 
-          {/* Save */}
+          {/* Bookmark */}
           <View className="w-[10%] justify-center">
             <TouchableOpacity
               onPress={() => toggleBookmarkAndSave(item, index)}
@@ -178,15 +172,10 @@ export default function NewsSection({ newsMain, label, loadMoreData }) {
       <FlatList
         nestedScrollEnabled={true}
         scrollEnabled={false}
-        data={newsMain}
+        data={newsProps}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
-        // onEndReached={loadMoreData} // Add this callback to load more data
-        // onEndReachedThreshold={0.1} // Adjust this threshold as needed
-        // contentContainerStyle={{
-        //   paddingBottom: hp(110),
-        // }}
       />
     </View>
   );

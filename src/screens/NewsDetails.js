@@ -8,7 +8,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
-import Loading from "../components/Loading";
 import { ChevronLeftIcon, ShareIcon } from "react-native-heroicons/outline";
 import { BookmarkSquareIcon } from "react-native-heroicons/solid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -28,14 +27,14 @@ export default function NewsDetails() {
       // Check if News Article is already in Storage
       const savedArticles = await AsyncStorage.getItem("savedArticles");
       let savedArticlesArray = savedArticles ? JSON.parse(savedArticles) : [];
-      console.log("Check if the article is already bookmarked");
+      // console.log("Check if the article is already bookmarked");
 
       // Check if the article is already in the bookmarked list
       const isArticleBookmarked = savedArticlesArray.some(
         (savedArticle) => savedArticle.url === item.url
       );
 
-      console.log("Check if the article is already in the bookmarked list");
+      // console.log("Check if the article is already in the bookmarked list");
 
       if (!isArticleBookmarked) {
         // If the article is not bookmarked, add it to the bookmarked list
@@ -45,7 +44,7 @@ export default function NewsDetails() {
           JSON.stringify(savedArticlesArray)
         );
         toggleBookmark(true);
-        console.log("Article is bookmarked");
+        // console.log("Article is bookmarked");
       } else {
         // If the article is already bookmarked, remove it from the list
         const updatedSavedArticlesArray = savedArticlesArray.filter(
@@ -56,7 +55,7 @@ export default function NewsDetails() {
           JSON.stringify(updatedSavedArticlesArray)
         );
         toggleBookmark(false);
-        console.log("Article is removed from bookmarks");
+        // console.log("Article is removed from bookmarks");
       }
     } catch (error) {
       console.log("Error Saving Article", error);
@@ -78,7 +77,7 @@ export default function NewsDetails() {
         );
 
         toggleBookmark(isArticleBookmarked);
-        console.log("Check if the current article is in bookmarks");
+        // console.log("Check if the current article is in bookmarks");
       } catch (error) {
         console.log("Error Loading Saved Articles", error);
       }

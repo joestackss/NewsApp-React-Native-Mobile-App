@@ -2,62 +2,45 @@ import {
   View,
   Text,
   ScrollView,
-  Image,
   TouchableOpacity,
   TextInput,
-  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState, useReducer } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useColorScheme } from "nativewind";
 import { StatusBar } from "expo-status-bar";
-import Loading from "../components/Loading";
+import Loading from "../components/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
-import { categories, newsData } from "../constants";
-
-import TrendingNews from "../components/TrendingNews";
-import Header from "../components/Header/Header";
+import { categories } from "../constants";
 import CategoriesCard from "../components/CategoriesCard";
 import NewsSection from "../components/NewsSection/NewsSection";
-import { MagnifyingGlassIcon, XMarkIcon } from "react-native-heroicons/outline";
-import { useNavigation } from "@react-navigation/native";
+import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import { fetchDiscoverNews } from "../../utils/NewsApi";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/native";
 
 export default function DiscoverScreen() {
-  const navigation = useNavigation();
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const [activeCategory, setActiveCategory] = useState("business");
-  const [selectedCategoryTitle, setSelectedCategoryTitle] =
-    useState("Architecture");
-  const [newsMain, setNewsMain] = useState([]);
-  const [discoverNews, setDiscoverNews] = useState([]);
+  const navigation = useNavigation();
+  const [withoutRemoved, setWithoutRemoved] = useState([]);
 
-  useEffect(() => {
-    console.log("active category", activeCategory);
-  }, [activeCategory]);
+  useEffect(() => {}, [activeCategory]);
+
+  const { data: discoverNew, isLoading: isDiscoverLoading } = useQuery({
+    queryKey: ["discoverNews", activeCategory],
+    queryFn: () => fetchDiscoverNews(activeCategory),
+  });
 
   const handleChangeCategory = (category) => {
-    // getRecipes(category);
     setActiveCategory(category);
-    setDiscoverNews([]);
-    console.log("category", category);
-  };
 
-  const { isLoading: isDiscoverLoading } = useQuery({
-    queryKey: ["discoverNews", activeCategory], // Include the category as part of the key
-    queryFn: () => fetchDiscoverNews(activeCategory), // You can skip the query if the category is "business"
-    onSuccess: (data) => {
-      // Filter out articles with title "[Removed]"
-      const filteredNews = data.articles.filter(
-        (article) => article.title !== "[Removed]"
-      );
-      setDiscoverNews(filteredNews);
-    },
-    onError: (error) => {
-      console.log("Error fetching discover news", error);
-    },
-  });
+    const filteredArticles = discoverNew?.articles.filter(
+      (article) => article.title !== "[Removed]"
+    );
+
+    setWithoutRemoved(filteredArticles || []);
+  };
 
   return (
     <SafeAreaView className="pt-8 bg-white dark:bg-neutral-900">
@@ -91,7 +74,7 @@ export default function DiscoverScreen() {
             <MagnifyingGlassIcon size="25" color="gray" />
           </TouchableOpacity>
           <TextInput
-            // onChangeText={handleTextDebounce}
+            onPressIn={() => navigation.navigate("Search")}
             placeholder="Search for news"
             placeholderTextColor={"gray"}
             className="pl-4 flex-1 font-medium text-black tracking-wider"
@@ -106,8 +89,9 @@ export default function DiscoverScreen() {
             handleChangeCategory={handleChangeCategory}
           />
         </View>
+
         <View className="h-full">
-          {/* News */}
+          {/* Header Title */}
           <View className="my-4 mx-4 flex-row justify-between items-center">
             <Text
               className="text-xl dark:text-white"
@@ -129,8 +113,8 @@ export default function DiscoverScreen() {
           </View>
 
           {isDiscoverLoading ? (
-            <View className="mt-8 flex-1 justify-center items-center">
-              <ActivityIndicator size="large" color="red" />
+            <View className="justify-center items-center">
+              <Loading />
             </View>
           ) : (
             <ScrollView
@@ -138,11 +122,7 @@ export default function DiscoverScreen() {
                 paddingBottom: hp(70),
               }}
             >
-              <NewsSection
-                categories={categories}
-                newsMain={discoverNews}
-                label="Discovery"
-              />
+              <NewsSection newsProps={withoutRemoved} label="Discovery" />
             </ScrollView>
           )}
         </View>
